@@ -1,0 +1,56 @@
+---
+# DEPLOYMENT MANIFEST #
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qamber-yelpclone-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qamber-yelpclone
+  template:
+    metadata:
+      labels:
+        app: qamber-yelpclone
+    spec:
+      containers:
+      - name: qamber-yelpclone-image
+        image: qmehdi/yelpclone       # docker image
+        ports:
+        - containerPort: 5000
+
+---
+# INGRESS MANIFEST #
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: qamber-yelpclone-ingress
+  annotations:
+    kubernetes.io/ingress.class: dev-ingress
+spec:
+  rules:
+  - host: qamber-yelpclone.dais.com
+    http:
+      paths:
+      - backend:
+          serviceName: qamber-yelpclone-service
+          servicePort: 5000
+          
+---
+# SERVICE MANIFEST #
+apiVersion: v1
+kind: Service
+metadata:
+  name: qamber-yelpclone-service
+  labels:
+    app: qamber-yelpclone
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: qamber-yelpclone
+  sessionAffinity: None
+  type: ClusterIP
