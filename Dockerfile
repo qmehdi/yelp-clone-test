@@ -1,12 +1,8 @@
-FROM python:3.8
+FROM ubuntu:16.04
 MAINTAINER Qamber Mehdi
 
-# RUN apt-get clean
-
-# RUN apt-get update -y && \
-# apt-get install -y python-dev build-essential
-
-RUN curl https://bootstrap.pypa.io/get-pip.py | python3
+RUN apt-get update -y
+RUN apt-get install -y python-pip python-dev build-essential
 
 VOLUME /app
 
@@ -19,4 +15,3 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 ENTRYPOINT ["/usr/bin/python", "app.py"]
-
