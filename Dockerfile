@@ -1,4 +1,4 @@
-FROM python3
+FROM python:slim
 MAINTAINER Qamber Mehdi
 
 # RUN apt-get clean
