@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 MAINTAINER Qamber Mehdi
 
+RUN apt-get clean
+
 RUN apt-get update -y && \
 apt-get install -y python-dev build-essential
 
