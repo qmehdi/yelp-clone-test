@@ -1,10 +1,10 @@
-FROM ubuntu:16.04
+FROM python3
 MAINTAINER Qamber Mehdi
 
-RUN apt-get clean
+# RUN apt-get clean
 
-RUN apt-get update -y && \
-apt-get install -y python-dev build-essential
+# RUN apt-get update -y && \
+# apt-get install -y python-dev build-essential
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 
@@ -14,7 +14,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 EXPOSE 5000
 
