@@ -2,7 +2,9 @@ FROM ubuntu:16.04
 MAINTAINER Qamber Mehdi
 
 RUN apt-get update -y && \
-apt-get install -y python-pip python-dev build-essential
+apt-get install -y python-dev build-essential
+
+RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 
 VOLUME /app
 
