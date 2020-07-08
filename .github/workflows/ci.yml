@@ -1,17 +1,30 @@
+
 name: CI
 
-on: [push]
+on: 
+  push:
+    branches:    
+      - cicd 
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
     
+    strategy:
+      matrix:
+        python-version: [ '3.x', 'pypy3' ]
+    
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
+    - name: Use Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Add remote origin
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+    - name: Deploy to Heroku
+      run: |
+        git push heroku HEAD:cicd -f
