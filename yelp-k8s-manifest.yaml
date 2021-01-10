@@ -56,10 +56,10 @@ metadata:
     app: qamber-yelpclone
 spec:
   ports:
-  - port: 5000
+  - port: 80
     protocol: TCP
     targetPort: 5000
   selector:
     app: qamber-yelpclone
   sessionAffinity: None
-  type: ClusterIP
+  type: LoadBalancer
