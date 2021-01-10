@@ -1,9 +1,16 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: yelpclone
+
+---
 # DEPLOYMENT MANIFEST #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: qamber-yelpclone-deployment
+  namespace: yelpclone
 spec:
   replicas: 1
   selector:
@@ -26,6 +33,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: qamber-yelpclone-ingress
+  namespace: yelpclone
   annotations:
     kubernetes.io/ingress.class: dev-ingress
 spec:
@@ -43,6 +51,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: qamber-yelpclone-service
+  namespace: yelpclone
   labels:
     app: qamber-yelpclone
 spec:
